@@ -6,13 +6,106 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://aguirrel.github.io/ng-currency/dist/ng-currency.js"></script> <!-- needed to show currency in tables -->
-<body>
+	<body>
 
-<div ng-app="putInQuestion" ng-controller="QuestionCtrl">
+		<div ng-app="putInQuestion" ng-controller="QuestionCtrl">
+		<div class="well">
+		<container>
 
-xx
+		
 
-</div>
-<script src="QuestionCtrl.js"></script>
-</body>
+			<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
+			<div class="row align-items-center">
+				<div class="col-md-4 col align-self-center">
+					<div ng-model="Format">
+						<label for="Format">Select Question Format:</label>
+			  			<select class="form-control" id="Format"> <!-- Remove hard coding later -->
+			    		<option value="Mulitple Choice">Mulitple Choice</option>
+			    		<option value="Mulitple Select">Mulitple Select</option>
+			    		<option value="True/False">True/False</option>
+			    		<option value="Drag and Drop">Drag and Drop</option>
+			    		<option value="Code Snippet">Code Snippet</option>
+			  			</select>
+			  		</div>
+		  		</div>
+		  		<div class="col align-self-center col-md-4 ">
+		  			<label for="Question">Question Text:</label>
+  					<textarea class="form-control" rows="5" id="Question"></textarea>
+		  		</div>
+		  		<div class="col-md-4 align-self-center">
+		  			<button type="button" class="btn btn-info">Clear Question</button>
+		  		</div>
+	  		</div>
+
+			</div>
+			<div class="well">
+				<div class="row align-items-start">
+					<div class="col align-self-center col-md-2">
+						<label for="Category">Select Categor(y/ies):</label>
+			  			<select class="form-control" id="Category"> <!-- Remove hard coding later -->
+			    		<option>Java</option>
+			    		<option>C#</option>
+			    		<option>.Net</option>
+			    		<option>Python</option>
+			    		<option>C++</option>
+			  			</select>
+		  			</div>
+		  			<div class="col align-self-center col-md-2">
+		  			<button type="button" class="btn btn-info">+</button>
+		  			</div>
+				</div>
+
+				<div class="row align-items-start">
+					<div class="col align-self-center col-md-2">
+						<label for="Tag">Select Tag(s):</label>
+			  			<select class="form-control" id="Tag"> <!-- Remove hard coding later -->
+			    		<option>OOP</option>
+			    		<option>Servlets</option>
+			    		<option>Web Services</option>
+			    		<option>MVC</option>
+			    		<option>Other</option>
+			  			</select>
+		  			</div>
+		  			<div class="col align-self-center col-md-2">
+		  			<button type="button" class="btn btn-info">+</button>
+		  			</div>
+				</div>
+			</div>
+			<label for="Tag">Select Options:</label>
+			<div class="well">
+				<div ng-show="Mulitple Choice">
+				MultiChoice
+				</div>
+				<div ng-show="Mulitple Select">
+				MultiChoice
+				</div>
+				<div ng-show="True/False">
+				MultiChoice
+				</div>
+				<div ng-show="Drag and Drop">
+				MultiChoice
+				</div>
+				<div ng-show="Code Snippet">
+				MultiChoice
+				</div>
+			
+			Note: Options<!-- changes based on format type -->
+
+			</div>
+			<label for="Tag">Select Answer(s):</label>
+			<div class="well">
+			
+			Note: Correct Answer(s)<!-- changes based on format type pulls choices from option list -->
+
+			</div>
+			<button type="button" class="btn btn-info">Add Question</button>
+
+
+
+		</container>
+		</div>
+
+		</div>
+	<script src="QuestionCtrl.js"></script>
+	</body>
 </html>
