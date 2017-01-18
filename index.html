@@ -1,111 +1,126 @@
 <!DOCTYPE html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+    <title>Bootstrap Case</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    
+    
+  </head>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="http://aguirrel.github.io/ng-currency/dist/ng-currency.js"></script> <!-- needed to show currency in tables -->
-	<body>
+	<body ng-app="" >
+		<div >
+			<div class="well">
+				<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
+				<div class="row ">
+					<div class="col-md-4">
+						<label >Select Question Format:</label>
+						<!-- Remove hard coding later -->
 
-		<div ng-app="putInQuestion" ng-controller="QuestionCtrl">
-		<div class="well">
-		<container>
+			  			<select ng-model='format'> 
 
-		
+				  			<option value=''>None
+				    		<option value="Mulitple Choice">Mulitple Choice
+				    		<option value="Mulitple Select">Mulitple Select
+				    		<option value="True/False">True/False
+				    		<option value="Drag and Drop">Drag and Drop
+				    		<option value="Code Snippet">Code Snippet
+			  			</select>	
 
-			<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
-			<div class="row align-items-center">
-				<div class="col-md-4 col align-self-center">
-					<div ng-model="Format">
-						<label for="Format">Select Question Format:</label>
-			  			<select class="form-control" id="Format"> <!-- Remove hard coding later -->
-			    		<option value="Mulitple Choice">Mulitple Choice</option>
-			    		<option value="Mulitple Select">Mulitple Select</option>
-			    		<option value="True/False">True/False</option>
-			    		<option value="Drag and Drop">Drag and Drop</option>
-			    		<option value="Code Snippet">Code Snippet</option>
-			  			</select>
 			  		</div>
+
+			  		<div class="col-md-4 ">
+			  			<label for="Question">Question Text:</label>
+	  					<textarea class="form-control" rows="5" id="Question"></textarea>
+			  		</div>
+
+			  		<div class="col-md-4 ">
+			  			<button type="button" class="btn btn-info">Clear Question</button>
+			  		</div>
+
 		  		</div>
-		  		<div class="col align-self-center col-md-4 ">
-		  			<label for="Question">Question Text:</label>
-  					<textarea class="form-control" rows="5" id="Question"></textarea>
-		  		</div>
-		  		<div class="col-md-4 align-self-center">
-		  			<button type="button" class="btn btn-info">Clear Question</button>
-		  		</div>
-	  		</div>
 
+				</div>
+				<div class="well">
+					<div class="row">
+						<div class="col-md-2">
+							<label for="Category">Select Categor(y/ies):</label>
+				  			<select> <!-- Remove hard coding later -->
+					  			<option value=''>None</option>
+					    		<option value='Java'>Java</option>
+					    		<option value='C#'>C#</option>
+					    		<option value='.Net'>.Net</option>
+					    		<option value='Python'>Python</option>
+					    		<option value='C++'>C++</option>
+				  			</select>
+			  			</div>
+			  			<!-- <div class="col align-self-center col-md-2"> -->
+			  			<button type="button" >+</button>
+			  			<!-- </div> -->
+					</div>
+
+					<div class="row ">
+						<div class=" col-md-2">
+							<label for="Tag">Select Tag(s):</label>
+							<!-- Remove hard coding later -->
+				  			<select > 
+				  			<option value=''>None</option>
+				    		<option value='OOP'>OOP</option>
+				    		<option value='Servlets'>Servlets</option>
+				    		<option value='Web Services'>Web Services</option>
+				    		<option value='MVC'>MVC</option>
+				    		<option value='Other'>Other</option>
+				  			</select>
+			  			</div>
+			  			<div class="col align-self-center col-md-2">
+			  			<button type="button">+</button>
+			  			</div>
+					</div>
+				</div>
+				<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
+				<div class="well" >
+					<div ng-switch="format">
+						<div ng-switch-when="Mulitple Choice">
+						<p>MultiChoice</p>
+						</div>
+						<div ng-switch-when="Mulitple Select">
+						<p>MultiSelect</p>
+						</div>
+						<div ng-switch-when="True/False">
+						<p>T/F</p>
+						</div>
+						<div ng-switch-when="Drag and Drop">
+						<p>D and D</p>
+						</div>
+						<div ng-switch-when="Code Snippet">
+						<p>Snip</p>
+						</div>
+						<div ng-switch-default>
+							<p>
+							 Note: Options
+							</p>
+						</div>
+					</div>
+
+	
+				</div>
+
+				<label for="Tag">Select Answer(s):</label>
+				<div class="well">
+				
+				Note: Correct Answer(s)<!-- changes based on format type pulls choices from option list -->
+
+				</div>
+				<button type="button" class="btn btn-info">Add Question</button>
 			</div>
-			<div class="well">
-				<div class="row align-items-start">
-					<div class="col align-self-center col-md-2">
-						<label for="Category">Select Categor(y/ies):</label>
-			  			<select class="form-control" id="Category"> <!-- Remove hard coding later -->
-			    		<option>Java</option>
-			    		<option>C#</option>
-			    		<option>.Net</option>
-			    		<option>Python</option>
-			    		<option>C++</option>
-			  			</select>
-		  			</div>
-		  			<div class="col align-self-center col-md-2">
-		  			<button type="button" class="btn btn-info">+</button>
-		  			</div>
-				</div>
-
-				<div class="row align-items-start">
-					<div class="col align-self-center col-md-2">
-						<label for="Tag">Select Tag(s):</label>
-			  			<select class="form-control" id="Tag"> <!-- Remove hard coding later -->
-			    		<option>OOP</option>
-			    		<option>Servlets</option>
-			    		<option>Web Services</option>
-			    		<option>MVC</option>
-			    		<option>Other</option>
-			  			</select>
-		  			</div>
-		  			<div class="col align-self-center col-md-2">
-		  			<button type="button" class="btn btn-info">+</button>
-		  			</div>
-				</div>
-			</div>
-			<label for="Tag">Select Options:</label>
-			<div class="well">
-				<div ng-show="Mulitple Choice">
-				MultiChoice
-				</div>
-				<div ng-show="Mulitple Select">
-				MultiChoice
-				</div>
-				<div ng-show="True/False">
-				MultiChoice
-				</div>
-				<div ng-show="Drag and Drop">
-				MultiChoice
-				</div>
-				<div ng-show="Code Snippet">
-				MultiChoice
-				</div>
-			
-			Note: Options<!-- changes based on format type -->
-
-			</div>
-			<label for="Tag">Select Answer(s):</label>
-			<div class="well">
-			
-			Note: Correct Answer(s)<!-- changes based on format type pulls choices from option list -->
-
-			</div>
-			<button type="button" class="btn btn-info">Add Question</button>
-
-
-
-		</container>
 		</div>
-
-		</div>
-	<script src="QuestionCtrl.js"></script>
+	
+	 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+  		<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
+  		<!-- <script src="QuestionCtrl.js"></script> -->
 	</body>
 </html>
