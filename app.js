@@ -13,7 +13,7 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 	$scope.optionList = []; 	//list of options for question
 	$scope.answerList = [];		//list of answer for question
 
-	$scope.go = function go(page){
+	$scope.go = function go(page){//change page based off of format dropdown
 		
 		$state.go(page);
 
@@ -23,10 +23,10 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 	
 
 
-	$scope.addCategory = function(){
+	$scope.addCategory = function(){//add categories to question
 
 		if($scope.category !=null && $scope.category !='')
-			if(!$scope.categoryList.includes($scope.category))
+			if(!$scope.categoryList.includes($scope.category))//checks for duplicates
 
 		{
             $scope.categoryList.push($scope.category);
@@ -40,10 +40,10 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 
 	};
 
-	$scope.addTag = function(){
+	$scope.addTag = function(){//add tags to question
 
 		if($scope.tag !=null && $scope.tag !='')
-			if(!$scope.tagList.includes($scope.tag))
+			if(!$scope.tagList.includes($scope.tag))//checks for duplicates
 
 		{
             $scope.tagList.push($scope.tag);
@@ -57,7 +57,24 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 
 	};
 
-	$scope.removeCategory = function(index)
+	$scope.addOption = function(){//add tags to question
+
+		if($scope.option !=null && $scope.option !='')
+			if(!$scope.optionList.includes($scope.option))//checks for duplicates
+
+		{
+            $scope.optionList.push($scope.option);
+            $scope.option = '';
+            
+        }
+        
+       	console.log(!$scope.optionList.includes($scope.option));
+        console.log($scope.optionList);
+
+
+	};
+
+	$scope.removeCategory = function(index)//removes category from question
         {
 
             $scope.categoryList.splice(index,1);
@@ -65,10 +82,18 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
         	
     };
 
-    $scope.removeTag = function(index)
+    $scope.removeTag = function(index)//removes tag from question
         {
 
             $scope.tagList.splice(index,1);
+
+        	
+    };
+
+    $scope.removeOption = function(index)//removes category from question
+        {
+
+            $scope.optionList.splice(index,1);
 
         	
     };
@@ -93,11 +118,13 @@ app.config(function($stateProvider,$urlRouterProvider){
 		.state('multipleChoice', {
 			url: '/multipleChoice',
 			templateUrl: 'MultipleChoiceView.htm'
+			// controller: 'QuestionCtrl'
 
 		})
 		.state('multipleSelect', {
 			url: '/multipleSelect',
-			templateUrl: 'MultipleSelectView.htm'
+			templateUrl: 'MultipleSelectView.htm',
+			controller: 'QuestionCtrl'
 
 		});
 
