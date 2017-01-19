@@ -14,11 +14,27 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 	$scope.answerList = [];		//list of answer for question
 
 	$scope.go = function go(page){//change page based off of format dropdown
-		
-		$state.go(page);
 
-		console.log($scope.format);
 		console.log(page);
+
+		if(page =='')// if no format is chosen then clears the question
+		{
+			
+			$state.go('home');
+			console.log(page);
+			
+		
+			
+		}
+		else{
+
+			$state.go(page);
+
+			console.log($scope.format);
+			console.log(page);
+		}
+		
+		
 	};
 	
 
@@ -98,6 +114,29 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
         	
     };
 
+    $scope.clearQuestion = function()//removes category from question
+        {
+
+           	$scope.format = '';
+			$scope.questionText = '';	//text of question
+			$scope.question = {};		//question json
+			$scope.categoryList = []; 	//list of categories
+			$scope.tagList = []; 		//list of tags
+			$scope.optionList = []; 	//list of options for question
+			$scope.answerList = [];		//list of answer for question
+
+			//clear out page selections
+			$scope.option = '';
+			$scope.tag = '';
+			$scope.category = '';
+			$scope.go('');
+			
+
+
+
+        	
+    };
+
 	//console.log($scope.format);
   
 });
@@ -111,7 +150,7 @@ app.config(function($stateProvider,$urlRouterProvider){
 
 		.state('home', {
 			url: '/',
-			templateUrl: 'index.html',
+			templateUrl: 'noSelectOptionView.htm',
 			controller: 'QuestionCtrl'
 		})
 
