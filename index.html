@@ -47,7 +47,8 @@
 					<div class="row">
 						<div class="col-md-2">
 							<label for="Category">Select Categor(y/ies):</label>
-				  			<select> <!-- Remove hard coding later change to pull from DB -->
+							<div >
+				  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB -->
 					  			<option value=''>None</option>
 					    		<option value='Java'>Java</option>
 					    		<option value='C#'>C#</option>
@@ -55,16 +56,18 @@
 					    		<option value='Python'>Python</option>
 					    		<option value='C++'>C++</option>
 				  			</select>
-				  			<button type="button" >+</button>
+				  			<button type="button" ng-click = 'addCategory()'>+</button>
 			  			</div>
 			  			
 					</div>
+					</div>
+
 
 					<div class="row ">
 						<div class=" col-md-2">
 							<label for="Tag">Select Tag(s):</label>
 							<!-- Remove hard coding later change to pull from DB-->
-				  			<select > 
+				  			<select ng-model='tag'> 
 				  			<option value=''>None</option>
 				    		<option value='OOP'>OOP</option>
 				    		<option value='Servlets'>Servlets</option>
@@ -72,7 +75,7 @@
 				    		<option value='MVC'>MVC</option>
 				    		<option value='Other'>Other</option>
 				  			</select>
-				  			<button type="button">+</button>
+				  			<button type="button" ng-click = 'addTag()'>+</button>
 			  			</div>
 			  			
 					</div>
