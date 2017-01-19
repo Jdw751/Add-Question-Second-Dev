@@ -31,7 +31,7 @@
 
 			  		</div>
 
-			  		<div class="col-md-4 ">
+			  		<div class="col-md-4">
 			  			<label for="Question">Question Text:</label>
 	  					<textarea class="form-control" rows="5" id="Question"></textarea>
 			  		</div>
@@ -43,9 +43,12 @@
 		  		</div>
 
 				</div>
+				<label for="category/tags">Add Category and/or Tags</label>
+				
 				<div class="well">
 					<div class="row">
-						<div class="col-md-2">
+					
+						<div class="col-md-6">
 							<label for="Category">Select Categor(y/ies):</label>
 							<div >
 				  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB -->
@@ -57,14 +60,22 @@
 					    		<option value='C++'>C++</option>
 				  			</select>
 				  			<button type="button" ng-click = 'addCategory()'>+</button>
-			  			</div>
+			  				</div>
+
+			  				<ol>
+			  					<li ng-model='category' ng-repeat='ones in categoryList'>
+			  					<span class='theList-{{ones.category}}'>{{ones}}</span>
+			  					<button type ='button' ng-click="removeCategory($index)" ng-model='category' class="btn ">-</button>
+			  					</li>
+			  				</ol>
 			  			
-					</div>
-					</div>
+						
+						</div>
+					<!-- </div> -->
 
 
-					<div class="row ">
-						<div class=" col-md-2">
+					<!-- <div class="row "> -->
+						<div class=" col-md-6">
 							<label for="Tag">Select Tag(s):</label>
 							<!-- Remove hard coding later change to pull from DB-->
 				  			<select ng-model='tag'> 
@@ -77,9 +88,16 @@
 				  			</select>
 				  			<button type="button" ng-click = 'addTag()'>+</button>
 			  			</div>
+			  			<ol>
+			  					<li ng-model='tag' ng-repeat='ones in tagList'>
+			  					<span class='theList-{{ones.tag}}'>{{ones}}</span>
+			  					<button type ='button' ng-click="removeTag($index)" ng-model='tag' class="btn ">-</button>
+			  					</li>
+			  				</ol>
 			  			
 					</div>
 				</div>
+			
 				
 					<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
 					<div class="well" >

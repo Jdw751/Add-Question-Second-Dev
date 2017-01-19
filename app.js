@@ -6,6 +6,7 @@ var choice = angular.module('multipleChoiceApp',[]);
 app.controller('QuestionCtrl', function($scope,$location,$state) {
 
 	$scope.format = '';
+	$scope.questionText = '';	//text of question
 	$scope.question = {};		//question json
 	$scope.categoryList = []; 	//list of categories
 	$scope.tagList = []; 		//list of tags
@@ -24,11 +25,16 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 
 	$scope.addCategory = function(){
 
-		if($scope.category !=null && $scope.category !=''){
+		if($scope.category !=null && $scope.category !='')
+			if(!$scope.categoryList.includes($scope.category))
+
+		{
             $scope.categoryList.push($scope.category);
+            $scope.category = '';
             
         }
-        console.log($scope.category);
+        console.log(!$scope.categoryList.includes($scope.category));
+        
         console.log($scope.categoryList);
 
 
@@ -36,15 +42,36 @@ app.controller('QuestionCtrl', function($scope,$location,$state) {
 
 	$scope.addTag = function(){
 
-		if($scope.tag !=null && $scope.tag !=''){
+		if($scope.tag !=null && $scope.tag !='')
+			if(!$scope.tagList.includes($scope.tag))
+
+		{
             $scope.tagList.push($scope.tag);
+            $scope.tag = '';
             
         }
-        console.log($scope.tag);
+        
+       	console.log(!$scope.tagList.includes($scope.tag));
         console.log($scope.tagList);
 
 
 	};
+
+	$scope.removeCategory = function(index)
+        {
+
+            $scope.categoryList.splice(index,1);
+
+        	
+    };
+
+    $scope.removeTag = function(index)
+        {
+
+            $scope.tagList.splice(index,1);
+
+        	
+    };
 
 	//console.log($scope.format);
   
