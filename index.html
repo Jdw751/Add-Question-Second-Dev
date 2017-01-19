@@ -10,7 +10,7 @@
     
   </head>
 
-	<body ng-app="" >
+	<body ng-app="putInQuestion" ng-controller="QuestionCtrl">
 		<div >
 			<div class="well">
 				<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
@@ -19,14 +19,14 @@
 						<label >Select Question Format:</label>
 						<!-- Remove hard coding later -->
 
-			  			<select ng-model='format'> 
+			  			<select ng-model='format' ng-change="go(format)"> 
 
 				  			<option value=''>None
-				    		<option value="Mulitple Choice">Mulitple Choice
-				    		<option value="Mulitple Select">Mulitple Select
-				    		<option value="True/False">True/False
-				    		<option value="Drag and Drop">Drag and Drop
-				    		<option value="Code Snippet">Code Snippet
+				    		<option value="multipleChoice">Multiple Choice
+				    		<option value="multipleSelect">Multiple Select
+				    		<option value="TrueFalse">True/False
+				    		<option value="DragAndDrop">Drag and Drop
+				    		<option value="CodeSnippet">Code Snippet
 			  			</select>	
 
 			  		</div>
@@ -37,7 +37,7 @@
 			  		</div>
 
 			  		<div class="col-md-4 ">
-			  			<button type="button" class="btn btn-info">Clear Question</button>
+			  			<button type="button" >Clear Question</button>
 			  		</div>
 
 		  		</div>
@@ -47,7 +47,7 @@
 					<div class="row">
 						<div class="col-md-2">
 							<label for="Category">Select Categor(y/ies):</label>
-				  			<select> <!-- Remove hard coding later -->
+				  			<select> <!-- Remove hard coding later change to pull from DB -->
 					  			<option value=''>None</option>
 					    		<option value='Java'>Java</option>
 					    		<option value='C#'>C#</option>
@@ -55,16 +55,15 @@
 					    		<option value='Python'>Python</option>
 					    		<option value='C++'>C++</option>
 				  			</select>
+				  			<button type="button" >+</button>
 			  			</div>
-			  			<!-- <div class="col align-self-center col-md-2"> -->
-			  			<button type="button" >+</button>
-			  			<!-- </div> -->
+			  			
 					</div>
 
 					<div class="row ">
 						<div class=" col-md-2">
 							<label for="Tag">Select Tag(s):</label>
-							<!-- Remove hard coding later -->
+							<!-- Remove hard coding later change to pull from DB-->
 				  			<select > 
 				  			<option value=''>None</option>
 				    		<option value='OOP'>OOP</option>
@@ -73,39 +72,42 @@
 				    		<option value='MVC'>MVC</option>
 				    		<option value='Other'>Other</option>
 				  			</select>
+				  			<button type="button">+</button>
 			  			</div>
-			  			<div class="col align-self-center col-md-2">
-			  			<button type="button">+</button>
-			  			</div>
+			  			
 					</div>
 				</div>
-				<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
-				<div class="well" >
-					<div ng-switch="format">
-						<div ng-switch-when="Mulitple Choice">
-						<p>MultiChoice</p>
-						</div>
-						<div ng-switch-when="Mulitple Select">
-						<p>MultiSelect</p>
-						</div>
-						<div ng-switch-when="True/False">
-						<p>T/F</p>
-						</div>
-						<div ng-switch-when="Drag and Drop">
-						<p>D and D</p>
-						</div>
-						<div ng-switch-when="Code Snippet">
-						<p>Snip</p>
-						</div>
-						<div ng-switch-default>
-							<p>
-							 Note: Options
-							</p>
-						</div>
-					</div>
+				
+					<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
+					<div class="well" >
+						<!-- <div ng-switch="format">
+							<div ng-switch-when="Mulitple Choice">
+							<p>MultiChoice</p>
+							</div>
+							<div ng-switch-when="Mulitple Select">
+							<p>MultiSelect</p>
+							</div>
+							<div ng-switch-when="True/False">
+							<p>T/F</p>
+							</div>
+							<div ng-switch-when="Drag and Drop">
+							<p>D and D</p>
+							</div>
+							<div ng-switch-when="Code Snippet">
+							<p>Snip</p>
+							</div>
+							<div ng-switch-default>
+								<p>
+								 Note: Options
+								</p>
+							</div>
+						</div> -->
+						<div ui-view></div>
 
-	
-				</div>
+
+		
+					</div>
+				
 
 				<label for="Tag">Select Answer(s):</label>
 				<div class="well">
@@ -113,14 +115,18 @@
 				Note: Correct Answer(s)<!-- changes based on format type pulls choices from option list -->
 
 				</div>
-				<button type="button" class="btn btn-info">Add Question</button>
+				<button type="button" >Add Question</button>
 			</div>
 		</div>
 	
 	 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
-  		<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
-  		<!-- <script src="QuestionCtrl.js"></script> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+	<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
+	<script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+
+  		
+  		<script src="app.js"></script>
+  		<script src="QuestionCtrl.js"></script>
 	</body>
 </html>
