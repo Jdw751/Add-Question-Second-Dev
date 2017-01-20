@@ -114,11 +114,16 @@
 				<label for="Tag">Select Answer(s):</label>
 				<div class="well">
 				
-				Note: Correct Answer(s)<!-- changes based on format type pulls choices from option list -->
+				<!-- changes based on format type pulls choices from option list -->
 
 					<ol>
-						<li ng-model='option' ng-repeat='each in optionList'>
-							<span class='theList-{{each.option}}'>{{each}}</span>
+						<li  ng-repeat='each in answerList'>
+							<span class='theList-{{each.answer}}'>
+							<input type='checkbox' ng-model='answer' value={{each.option}} ng-change='selectedAnswer($index,answer)'>
+
+							{{each.option}} 
+
+							</span>
 						</li>
 					</ol>
 
@@ -140,5 +145,10 @@
   		
   		<script src="app.js"></script>
   		<script src="QuestionCtrl.js"></script>
+  		
+  		<script src="MultipleSelectCtrl.js"></script>
+
+  		<script src="QuestionFactory.js"></script>
+
 	</body>
 </html>
