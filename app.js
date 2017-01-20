@@ -23,6 +23,7 @@ app.controller('QuestionCtrl',
 			$scope.option = '';
 			$scope.tag = '';
 			$scope.category = '';
+			$scope.questionText = '';
 			$state.go('home');
 			console.log(page);
 			
@@ -31,6 +32,14 @@ app.controller('QuestionCtrl',
 			
 		}
 		else{
+
+			$scope.option = '';
+			$scope.tag = '';
+			$scope.category = '';
+
+			$scope.categoryList = []; 	
+			$scope.tagList = []; 
+			$rootScope.answerList = [];	
 
 			$state.go(page);
 
@@ -137,6 +146,7 @@ app.controller('QuestionCtrl',
 			$scope.option = '';
 			$scope.tag = '';
 			$scope.category = '';
+			$scope.questionText = '';
 			$scope.go('');
 			
 
@@ -148,7 +158,7 @@ app.controller('QuestionCtrl',
     $scope.selectedAnswer = function(index,answer){
     	
     	$rootScope.answerList[index].correct = answer;
-    	
+
     	console.log(answer);
     	console.log ($rootScope.answerList[index].correct); 
     	console.log ($rootScope.answerList[index]);
