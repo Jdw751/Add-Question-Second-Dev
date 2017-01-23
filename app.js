@@ -6,11 +6,18 @@ var choice = angular.module('multipleChoiceApp',[]);
 app.controller('QuestionCtrl', 
 	function($scope,$location,$state,$rootScope) {
 
-	$scope.format = '';
-	$scope.questionText = '';	//text of question
-	$scope.question = {};		//question json
-	$scope.categoryList = []; 	//list of categories
-	$scope.tagList = []; 		//list of tags
+	$scope.question = {				//question json
+			format:$scope.format,
+    		questionText: $scope.questionText,
+    		category:$scope.categoryList,
+    		tags:$scope.tagList,
+    		answer:$rootScope.answerList
+	};		
+
+	$scope.format = '';				//format of question
+	$scope.questionText = '';		//text of question	
+	$scope.categoryList = []; 		//list of categories
+	$scope.tagList = []; 			//list of tags
 	$rootScope.optionList = []; 	//list of options for question
 	$rootScope.answerList = [];		//list of answer for question
 
@@ -100,7 +107,7 @@ app.controller('QuestionCtrl',
         
        	console.log(!$scope.optionList.includes($scope.option));
         console.log($rootScope.optionList);
-         console.log($rootScope.answerList);
+        console.log($rootScope.answerList);
 
 
 	};
@@ -175,6 +182,22 @@ app.controller('QuestionCtrl',
 
          console.log($rootScope.answerList);
 
+
+
+    };
+
+    $scope.saveQuestion = function (){
+
+    	console.log($rootScope.answerList);
+
+    	$scope.question.format = $scope.format;
+    	$scope.question.questionText = $scope.questionText;
+    	$scope.question.category = $scope.categoryList;
+    	$scope.question.tags = $scope.tagList;
+    	$scope.question.answer = $rootScope.answerList;
+    
+
+    	console.log($scope.question);
 
 
     };
