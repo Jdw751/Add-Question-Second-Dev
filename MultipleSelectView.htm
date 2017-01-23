@@ -15,6 +15,28 @@
 			</li>
 		</ol>
 
+		<label for="Tag">Select Answer(s):</label>
+				<div class="well">
+				
+				<!-- changes based on format type pulls choices from option list -->
+
+					<ol>
+						<li  ng-repeat='each in answerList'>
+							<span class='theList-{{each.answer}}'>
+							<input type='checkbox' ng-model='answer' value={{each.option}} ng-change='selectedAnswer($index,answer)'>
+
+							{{each.option}} 
+
+							</span>
+						</li>
+					</ol>
+
+					
+
+					
+
+				</div>
+
 		
 		
 	

@@ -37,8 +37,7 @@ app.controller('QuestionCtrl',
 			$scope.tag = '';
 			$scope.category = '';
 
-			$scope.categoryList = []; 	
-			$scope.tagList = []; 
+			
 			$rootScope.answerList = [];	
 
 			$state.go(page);
@@ -167,6 +166,19 @@ app.controller('QuestionCtrl',
 
     };
 
+     $scope.setChoiceForQuestion = function (q, c) {
+        angular.forEach(q, function (c) {
+            c.correct = false;
+        });
+        
+        c.correct = true;
+
+         console.log($rootScope.answerList);
+
+
+
+    };
+
 	//console.log($scope.format);
   
 });
@@ -186,8 +198,8 @@ app.config(function($stateProvider,$urlRouterProvider){
 
 		.state('multipleChoice', {
 			url: '/multipleChoice',
-			templateUrl: 'MultipleChoiceView.htm'
-			// controller: 'QuestionCtrl'
+			templateUrl: 'MultipleChoiceView.htm',
+			controller: 'QuestionCtrl'
 
 		})
 		.state('multipleSelect', {
