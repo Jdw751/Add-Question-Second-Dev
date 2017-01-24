@@ -31,24 +31,20 @@ app.controller('QuestionCtrl',
 			$scope.tag = '';
 			$scope.category = '';
 			$scope.questionText = '';
-			$state.go('home');
-			console.log(page);
-			
 
-		
-			
+			$state.go('home');
+			//debuging
+			console.log(page);					
 		}
 		else{
 
 			$scope.option = '';
 			$scope.tag = '';
-			$scope.category = '';
-
-			
+			$scope.category = '';			
 			$rootScope.answerList = [];	
 
 			$state.go(page);
-
+			//debuging
 			console.log($scope.format);
 			console.log(page);
 		}
@@ -56,8 +52,6 @@ app.controller('QuestionCtrl',
 		
 	};
 	
-	
-
 
 	$scope.addCategory = function(){//add categories to question
 
@@ -66,11 +60,11 @@ app.controller('QuestionCtrl',
 
 		{
             $scope.categoryList.push($scope.category);
-            $scope.category = '';
+            $scope.category = '';//clears the checkbox
             
         }
-        console.log(!$scope.categoryList.includes($scope.category));
-        
+        //debuging
+        console.log(!$scope.categoryList.includes($scope.category));      
         console.log($scope.categoryList);
 
 
@@ -83,28 +77,28 @@ app.controller('QuestionCtrl',
 
 		{
             $scope.tagList.push($scope.tag);
-            $scope.tag = '';
+            $scope.tag = '';//clears the check box
             
         }
-        
+        //debuging
        	console.log(!$scope.tagList.includes($scope.tag));
         console.log($scope.tagList);
 
 
 	};
 
-	$scope.addOption = function(){//add tags to question
+	$scope.addOption = function(){//add an option to question
 
 		if($scope.option !=null && $scope.option !='')
 			if(!$rootScope.optionList.includes($scope.option))//checks for duplicates
 
 		{
             $rootScope.optionList.push($scope.option);
-            $rootScope.answerList.push({option:$scope.option, correct:false});
+            $rootScope.answerList.push({option:$scope.option, correct:false});//maps the option to the question
             $scope.option = '';
             
         }
-        
+        //debuging
        	console.log(!$scope.optionList.includes($scope.option));
         console.log($rootScope.optionList);
         console.log($rootScope.answerList);
@@ -115,29 +109,23 @@ app.controller('QuestionCtrl',
 	$scope.removeCategory = function(index)//removes category from question
         {
 
-            $scope.categoryList.splice(index,1);
-
-        	
+            $scope.categoryList.splice(index,1);       	
     };
 
     $scope.removeTag = function(index)//removes tag from question
         {
 
-            $scope.tagList.splice(index,1);
-
-        	
+            $scope.tagList.splice(index,1);      	
     };
 
-    $scope.removeOption = function(index)//removes category from question
+    $scope.removeOption = function(index)//removes option from question
         {
 
             $rootScope.optionList.splice(index,1);
-            $rootScope.answerList.splice(index,1);
-
-        	
+            $rootScope.answerList.splice(index,1);      	
     };
 
-    $scope.clearQuestion = function()//removes category from question
+    $scope.clearQuestion = function()//clears all parameters on the question
         {
 
            	$scope.format = '';
@@ -153,41 +141,34 @@ app.controller('QuestionCtrl',
 			$scope.tag = '';
 			$scope.category = '';
 			$scope.questionText = '';
+
 			$scope.go('');
-			
-
-
-
-        	
+		      	
     };
 
     $scope.selectedAnswer = function(index,answer){
     	
     	$rootScope.answerList[index].correct = answer;
-
+    	//debuging
     	console.log(answer);
     	console.log ($rootScope.answerList[index].correct); 
-    	console.log ($rootScope.answerList[index]);
-    	
-
-
+    	console.log ($rootScope.answerList[index]);   	
     };
 
-     $scope.setChoiceForQuestion = function (q, c) {
-        angular.forEach(q, function (c) {
-            c.correct = false;
+    //sets answers for multiple choice question
+    $scope.setChoiceForQuestion = function (question, selectedCorrect) {
+        angular.forEach(question, function (selectedCorrect) {
+            selectedCorrect.correct = false;
         });
         
-        c.correct = true;
-
-         console.log($rootScope.answerList);
-
-
+        selectedCorrect.correct = true;
+        //debuging
+        console.log($rootScope.answerList);
 
     };
 
     $scope.saveQuestion = function (){
-
+    	//debuging
     	console.log($rootScope.answerList);
 
     	$scope.question.format = $scope.format;
@@ -196,14 +177,11 @@ app.controller('QuestionCtrl',
     	$scope.question.tags = $scope.tagList;
     	$scope.question.answer = $rootScope.answerList;
     
-
+    	//debuging
     	console.log($scope.question);
 
-
     };
-
-	//console.log($scope.format);
-  
+ 
 });
 
 
@@ -212,24 +190,20 @@ app.config(function($stateProvider,$urlRouterProvider){
 	$urlRouterProvider.otherwise('');
 	
 	$stateProvider
-
 		.state('home', {
 			url: '/',
 			templateUrl: 'noSelectOptionView.htm',
 			controller: 'QuestionCtrl'
 		})
-
 		.state('multipleChoice', {
 			url: '/multipleChoice',
 			templateUrl: 'MultipleChoiceView.htm',
 			controller: 'QuestionCtrl'
-
 		})
 		.state('multipleSelect', {
 			url: '/multipleSelect',
 			templateUrl: 'MultipleSelectView.htm',
 			controller: 'QuestionCtrl'
-
 		});
 
 });

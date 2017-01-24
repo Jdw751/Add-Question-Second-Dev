@@ -1,43 +1,41 @@
 <div ng-app='multipleSelectApp'>
 		
-		
-		<form ng-submit="addOption()">
-			Enter Option:
-			<input type="text" ng-model="option" placeholder='put it here'/>
-			<input type ='submit' value="Add Option">
-		</form>
+	<div class="row">
+		<div class="col-md-6">
+			<div class = "well">
+				<form ng-submit="addOption()">
+					Enter Option:
+					<input type="text" ng-model="option" placeholder='put it here'/>
+					<input type ='submit' value="Add Option">
+				</form>
 
 
-		<ol>
-			<li ng-model='option' ng-repeat='each in optionList'>
-			<span class='theList-{{each.option}}'>{{each}}</span>
-			<button type ='button' ng-click="removeOption($index)" ng-model='option' class="btn ">-</button>
-			</li>
-		</ol>
-
-		<label for="Tag">Select Answer(s):</label>
-				<div class="well">
-				
+				<ol>
+					<li ng-model='option' ng-repeat='each in optionList'>
+					<span class='theList-{{each.option}}'>{{each}}</span>
+					<button type ='button' ng-click="removeOption($index)" ng-model='option' class="btn ">-</button>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<!-- <label for="Tag">Select Answer(s):</label> -->
+		<div class="col-md-6">
+			<div class="well">		
+				<br>	
 				<!-- changes based on format type pulls choices from option list -->
+				<ol>
+					<li  ng-repeat='each in answerList'>
+						<span class='theList-{{each.answer}}'>
+						<input type='checkbox' ng-model='answer' value={{each.option}} ng-change='selectedAnswer($index,answer)'>
+						{{each.option}} 
+						</span>
 
-					<ol>
-						<li  ng-repeat='each in answerList'>
-							<span class='theList-{{each.answer}}'>
-							<input type='checkbox' ng-model='answer' value={{each.option}} ng-change='selectedAnswer($index,answer)'>
+					</li>
+				</ol>
+			</div>
+		</div>
 
-							{{each.option}} 
-
-							</span>
-						</li>
-					</ol>
-
-					
-
-					
-
-				</div>
-
-		
+	</div>
 		
 	
 	

@@ -11,129 +11,105 @@
   </head>
 
 	<body ng-app="putInQuestion" ng-controller="QuestionCtrl">
-		<div >
+		
 			<div class="well">
 				<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
-				<div class="row ">
-					<div class="col-md-4">
-						<label >Select Question Format:</label>
-						<!-- Remove hard coding later -->
+					<div class="row ">
+						<div class="col-md-4">
+							<label >Select Question Format:</label>
+							<!-- Remove hard coding later -->
+				  			<select ng-model='format' ng-change="go(format)"> 
 
-			  			<select ng-model='format' ng-change="go(format)"> 
-
-				  			<option value=''>---Choose A Format---
-				    		<option value="multipleChoice">Multiple Choice
-				    		<option value="multipleSelect">Multiple Select
-				    		<option value="TrueFalse">True/False
-				    		<option value="DragAndDrop">Drag and Drop
-				    		<option value="CodeSnippet">Code Snippet
-			  			</select>	
-
+					  			<option value=''>---Choose A Format---
+					    		<option value="multipleChoice">Multiple Choice
+					    		<option value="multipleSelect">Multiple Select
+					    		<option value="TrueFalse">True/False
+					    		<option value="DragAndDrop">Drag and Drop
+					    		<option value="CodeSnippet">Code Snippet
+				  			</select>	
+				  		</div>
+				  		<div class="col-md-4">
+				  			<label for="Question">Question Text:</label>
+		  					<textarea class="form-control" rows="5" id="Question" ng-model="questionText"></textarea>
+				  		</div>
 			  		</div>
-
-			  		<div class="col-md-4">
-			  			<label for="Question">Question Text:</label>
-	  					<textarea class="form-control" rows="5" id="Question" ng-model="questionText"></textarea>
-			  		</div>
-
-			  		<div class="col-md-4 ">
-			  			<button type="button" ng-click="clearQuestion()">Clear Question</button>
-			  		</div>
-
-		  		</div>
-
 				</div>
-				<label for="category/tags">Add Category and/or Tags</label>
-				
+				<label for="category/tags">Add Category and/or Tags</label>				
 				<div class="well">
-					<div class="row">
-					
-						<div class="col-md-6">
+					<div class="row">					
+						<div class="col-md-3">
 							<label for="Category">Select Categor(y/ies):</label>
-							<div >
-				  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB -->
-					  			<option value=''>None</option>
-					    		<option value='Java'>Java</option>
-					    		<option value='C#'>C#</option>
-					    		<option value='.Net'>.Net</option>
-					    		<option value='Python'>Python</option>
-					    		<option value='C++'>C++</option>
-				  			</select>
-				  			<button type="button" ng-click = 'addCategory()'>+</button>
+							<div>
+					  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB -->
+						  			<option value=''>None</option>
+						    		<option value='Java'>Java</option>
+						    		<option value='C#'>C#</option>
+						    		<option value='.Net'>.Net</option>
+						    		<option value='Python'>Python</option>
+						    		<option value='C++'>C++</option>
+					  			</select>
+					  			<button type="button" ng-click = 'addCategory()'>+</button>
 			  				</div>
-
+			  			</div>
+			  			<div class="col-md-3">
 			  				<ol>
 			  					<li ng-model='category' ng-repeat='ones in categoryList'>
 			  					<span class='theList-{{ones.category}}'>{{ones}}</span>
 			  					<button type ='button' ng-click="removeCategory($index)" ng-model='category' class="btn ">-</button>
 			  					</li>
-			  				</ol>
-			  			
-						
-						</div>
-					<!-- </div> -->
-
-
-					<!-- <div class="row "> -->
-						<div class=" col-md-6">
+			  				</ol>		  			
+						</div>						
+						<div class=" col-md-3">
 							<label for="Tag">Select Tag(s):</label>
 							<!-- Remove hard coding later change to pull from DB-->
-				  			<select ng-model='tag'> 
-				  			<option value=''>None</option>
-				    		<option value='OOP'>OOP</option>
-				    		<option value='Servlets'>Servlets</option>
-				    		<option value='Web Services'>Web Services</option>
-				    		<option value='MVC'>MVC</option>
-				    		<option value='Other'>Other</option>
-				  			</select>
-				  			<button type="button" ng-click = 'addTag()'>+</button>
+							<div>
+					  			<select ng-model='tag'> 
+					  			<option value=''>None</option>
+					    		<option value='OOP'>OOP</option>
+					    		<option value='Servlets'>Servlets</option>
+					    		<option value='Web Services'>Web Services</option>
+					    		<option value='MVC'>MVC</option>
+					    		<option value='Other'>Other</option>
+					  			</select>
+					  			<button type="button" ng-click = 'addTag()'>+</button>
+				  			</div>
 			  			</div>
-			  			<ol>
-		  					<li ng-model='tag' ng-repeat='ones in tagList'>
-		  					<span class='theList-{{ones.tag}}'>{{ones}}</span>
-		  					<button type ='button' ng-click="removeTag($index)" ng-model='tag' class="btn ">-</button>
-		  					</li>
-	  					</ol>
-			  			
+			  			<div class=" col-md-3">
+				  			<ol>
+			  					<li ng-model='tag' ng-repeat='ones in tagList'>
+			  					<span class='theList-{{ones.tag}}'>{{ones}}</span>
+			  					<button type ='button' ng-click="removeTag($index)" ng-model='tag' class="btn ">-</button>
+			  					</li>
+		  					</ol>
+	  					</div>		  			
 					</div>
 				</div>
 			
-				
-					<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
-					<div class="well" >
-						
-						<!-- <div class="container"> -->
-							<div ui-view></div>
-						<!-- </div> -->
-
-
-		
+				<div class = "row">
+					<div class = "col-md-6">
+						<label for="Tag">Select Options:<!-- changes based on format type probably ng-view --></label>
 					</div>
-				<!-- changes based on format type pulls choices from option list -->
+					<div class = "col-md-6">
+						<label for="Tag">Select Answer(s):</label>
+					</div>
+					<div ui-view>
+					</div>
 
-				<!-- <label for="Tag">Select Answer(s):</label>
-				<div class="well">
+				</div>
+				<div class = "row">
+					<div class= "col-md-offset-5 col-md-4">
+
+						<button type="button" ng-click="saveQuestion()">Add Question</button>
+					</div>
+					<div class= " col-md-3">
+
+					<button type="button" ng-click="clearQuestion()">Clear Question</button>
+					</div>
+
+				</div>
+
+
 				
-				
-
-					<ol>
-						<li  ng-repeat='each in answerList'>
-							<span class='theList-{{each.answer}}'>
-							<input type='checkbox' ng-model='answer' value={{each.option}} ng-change='selectedAnswer($index,answer)'>
-
-							{{each.option}} 
-
-							</span>
-						</li>
-					</ol>
-
-					
-
-					
-
-				</div> --> 
-				<button type="button" ng-click="saveQuestion()">Add Question</button>
-			</div>
 		</div>
 	
 	 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
