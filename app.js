@@ -11,7 +11,7 @@ app.controller('QuestionCtrl',
     		questionText: $scope.questionText,
     		category:$scope.categoryList,
     		tags:$scope.tagList,
-    		answer:$rootScope.answerList
+    		choices:$rootScope.answerList
 	};		
 
 	$scope.format = '';				//format of question
@@ -122,7 +122,8 @@ app.controller('QuestionCtrl',
         {
 
             $rootScope.optionList.splice(index,1);
-            $rootScope.answerList.splice(index,1);      	
+            $rootScope.answerList.splice(index,1); 
+            console.log($rootScope.answerList);     	
     };
 
     $scope.clearQuestion = function()//clears all parameters on the question
@@ -146,6 +147,7 @@ app.controller('QuestionCtrl',
 		      	
     };
 
+    //sets answer to multiple select question
     $scope.selectedAnswer = function(index,answer){
     	
     	$rootScope.answerList[index].correct = answer;
@@ -159,6 +161,7 @@ app.controller('QuestionCtrl',
     $scope.setChoiceForQuestion = function (question, selectedCorrect) {
         angular.forEach(question, function (selectedCorrect) {
             selectedCorrect.correct = false;
+            console.log($rootScope.answerList);
         });
         
         selectedCorrect.correct = true;
@@ -167,6 +170,7 @@ app.controller('QuestionCtrl',
 
     };
 
+    //save question to db
     $scope.saveQuestion = function (){
     	//debuging
     	console.log($rootScope.answerList);
@@ -175,7 +179,7 @@ app.controller('QuestionCtrl',
     	$scope.question.questionText = $scope.questionText;
     	$scope.question.category = $scope.categoryList;
     	$scope.question.tags = $scope.tagList;
-    	$scope.question.answer = $rootScope.answerList;
+    	$scope.question.choices = $rootScope.answerList;
     
     	//debuging
     	console.log($scope.question);

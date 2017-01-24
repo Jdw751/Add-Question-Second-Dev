@@ -1,7 +1,20 @@
 var app = angular.module("putInQuestion");
 
-question.factory('questionFactory',function($http){
+app.factory('questionFactory',function($http){
 
 	var factory = {};
-	
-})
+
+	factory.getCategories = function(){//incomplete should pull list from db
+
+		return ["Java", "C#",".Net","Python", "C++"];
+	};
+
+	factory.getTags = function(){//incomplete should pull list from db
+		return ["OOP","Servlets","Web Services","MVC","Other"];
+	};
+
+
+
+	return factory;
+
+});
