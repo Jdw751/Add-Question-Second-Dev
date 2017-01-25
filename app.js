@@ -42,10 +42,21 @@ app.controller('QuestionCtrl',
 		}
 		else{
 
-			$scope.option = '';
-			$scope.tag = '';
-			$scope.category = '';			
-			$rootScope.answerList = [];	
+			
+			
+			$scope.question 		= {};	//question json
+			$scope.categoryList 	= []; 	//list of categories
+			$scope.tagList 			= []; 	//list of tags
+			$rootScope.optionList 	= []; 	//list of options for question
+			$rootScope.answerList 	= [];	//list of answer for question
+			$scope.categories 		= questionFactory.getCategories();
+			$scope.tags 			= questionFactory.getTags();
+
+			//clear out page selections
+			$scope.option 			= '';
+			$scope.tag 				= '';
+			$scope.category 		= '';
+			
 
 			$state.go(page);
 			//debuging
