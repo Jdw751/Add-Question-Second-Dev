@@ -13,7 +13,8 @@
 			<div class="well"> <!-- add Question section has dropdown section for format text box for question and clear question-->
 				<div class="row ">
 					<div class="col-md-4">
-						<label >Select Question Format:</label>
+						<label >Select Format:</label>
+						<br>
 						<!-- Remove hard coding later -->
 			  			<select ng-model='format' ng-change="go(format)"> 			
 				    		<option disabled="disabled" selected="selected">Select a Format</option>
@@ -26,70 +27,85 @@
 			  		</div>
 		  		</div>
 			</div>
-			<label for="category/tags">Add Category and/or Tags</label>				
-			<div class="well">
-				<div class="row">					
-					<div class="col-md-3">
-						<label for="Category">Select Categor(y/ies):</label>
-						<div>
-				  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB --> 
-					  			<option disabled="disabled" selected="selected">Select a Category</option>
-					  			<option ng-repeat= "category in categories">{{category}}</option>					  		
-				  			</select>
-				  			<button type="button" ng-click = 'addCategory()'>Add</button>
-		  				</div>
-		  			</div>
-		  			<div class="col-md-3">
-			  			<table class = "table table-hover">
-				  			<tbody>
-				  				<tr ng-model='category' ng-repeat='ones in categoryList'>
-					  				<td>
-				  						<span class='theList-{{ones.category}}'>{{ones}}</span>
-				  					</td>
-				  					<td>
-				  						<button type ='button' ng-click="removeCategory($index)" ng-model='category' class="btn ">-</button>
-				  					</td>	  					
-				  				</tr>	
-				  			</tbody>
-			  			</table>			  		
-					</div>						
-					<div class=" col-md-3">
-						<label for="Tag">Select Tag(s):</label>
-						<!-- Remove hard coding later change to pull from DB-->
-						<div>
-				  			<select ng-model='tag'> 
-				  				<option disabled="disabled" selected="selected">Select a Tag</option>
-					  			<option ng-repeat= "tag in tags">{{tag}}</option>
-				  			</select>
-				  			<button type="button" ng-click = 'addTag()'>Add</button>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label for="category/tags">Add Category and/or Tags</label>	
+				</div>			
+				<div class ="panel-body">	
+					<div class="row">					
+						<div class="col-md-3">
+							<label for="Category">Select Categor(y/ies):</label>
+							<div>
+					  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB --> 
+						  			<option disabled="disabled" selected="selected">Select a Category</option>
+						  			<option ng-repeat= "category in categories">{{category}}</option>					  		
+					  			</select>
+					  			<button type="button" ng-click = 'addCategory()'>Add</button>
+			  				</div>
 			  			</div>
-		  			</div>
-		  			<div class=" col-md-3">
-			  			<table class="table table-hover">
-				  			<tbody>
-					  			<tr ng-model='tag' ng-repeat='ones in tagList'>
-						  			<td>
-				  						<span class='theList-{{ones.tag}}'>{{ones}}</span>
-				  					</td>
-				  					<td>
-				  						<button type ='button' ng-click="removeTag($index)" ng-model='tag' class="btn ">-</button>
-				  					</td>
-			  					</tr>
-			  				</tbody>
-		  				</table>
-  					</div>		  			
+			  			<div class="col-md-3">
+				  			<table class = "table table-hover">
+					  			<tbody>
+					  				<tr ng-model='category' ng-repeat='ones in categoryList'>
+						  				<td>
+					  						<span class='theList-{{ones.category}}'>{{ones}}</span>
+					  					</td>
+					  					<td>
+					  						<button type ='button' ng-click="removeCategory($index)" ng-model='category' class="btn ">Remove</button>
+					  					</td>	  					
+					  				</tr>	
+					  			</tbody>
+				  			</table>			  		
+						</div>						
+						<div class=" col-md-3">
+							<label for="Tag">Select Tag(s):</label>
+							<!-- Remove hard coding later change to pull from DB-->
+							<div>
+					  			<select ng-model='tag'> 
+					  				<option disabled="disabled" selected="selected">Select a Tag</option>
+						  			<option ng-repeat= "tag in tags">{{tag}}</option>
+					  			</select>
+					  			<button type="button" ng-click = 'addTag()'>Add</button>
+				  			</div>
+			  			</div>
+			  			<div class=" col-md-3">
+				  			<table class="table table-hover">
+					  			<tbody>
+						  			<tr ng-model='tag' ng-repeat='ones in tagList'>
+							  			<td>
+					  						<span class='theList-{{ones.tag}}'>{{ones}}</span>
+					  					</td>
+					  					<td>
+					  						<button type ='button' ng-click="removeTag($index)" ng-model='tag' class="btn ">Remove</button>
+					  					</td>
+				  					</tr>
+				  				</tbody>
+			  				</table>
+	  					</div>		  			
+					</div>				
 				</div>
-			</div>		
-			<div class = "row">
-				<div class = "col-md-6">
-					<label for="Tag">Enter Choices<!-- changes based on format type probably ng-view --></label>
+			</div>	
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class = "row">
+						<div class = "col-md-6">
+							<label for="Tag">Enter Choices<!-- changes based on format type probably ng-view --></label>
+						</div>
+						<div class = "col-md-6">
+							<label for="Tag">Select Answer(s):</label>
+						</div>
+					</div>	
 				</div>
-				<div class = "col-md-6">
-					<label for="Tag">Select Answer(s):</label>
-				</div>
-				<div ui-view>
+				<div class ="panel-body">
+
+					<div ui-view>
+					</div>				
 				</div>
 			</div>
+
+
 			<div class = "row">
 				<div class= "col-md-offset-5 col-md-4">
 					<button type="button" ng-click="saveQuestion()">Add Question</button>
@@ -97,7 +113,10 @@
 				<div class= " col-md-3">
 					<button type="button" ng-click="clearQuestion()">Clear Question</button>
 				</div>
-			</div>				
+			</div>
+
+
+
 		</div>
 	
 	 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
