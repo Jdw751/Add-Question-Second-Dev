@@ -57,7 +57,6 @@ app.controller('QuestionCtrl',
 			$scope.tag 				= '';
 			$scope.category 		= '';
 			
-
 			$state.go(page);
 			//debuging
 			console.log($scope.format);
@@ -84,7 +83,6 @@ app.controller('QuestionCtrl',
         console.log(!$scope.categoryList.includes($scope.category));      
         console.log($scope.categoryList);
         console.log("/");
-        
         console.log($scope.categories);
 
 
