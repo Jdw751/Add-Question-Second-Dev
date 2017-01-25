@@ -13,6 +13,14 @@ app.factory('questionFactory',function($http){
 		return ["OOP","Servlets","Web Services","MVC","Other"];
 	};
 
+	factory.getFormats = function(){//incomplete should pull list from db
+		return [
+			{formatName: "", formatType: "None"},
+			{formatName: "multipleChoice", formatType: "Multiple Choice"},
+			{formatName: "multipleSelect", formatType: "Multiple Select"}
+				]
+	};
+
 
 
 	return factory;

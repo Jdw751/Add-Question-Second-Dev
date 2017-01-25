@@ -18,14 +18,9 @@
 						<div class="col-md-4">
 							<label >Select Question Format:</label>
 							<!-- Remove hard coding later -->
-				  			<select ng-model='format' ng-change="go(format)"> 
-
-					  			<option value=''>---Choose A Format---
-					    		<option value="multipleChoice">Multiple Choice
-					    		<option value="multipleSelect">Multiple Select
-					    		<option value="TrueFalse">True/False
-					    		<option value="DragAndDrop">Drag and Drop
-					    		<option value="CodeSnippet">Code Snippet
+				  			<select ng-model='format' ng-change="go(format)"> 			
+					    		<option disabled="disabled" selected="selected">Select a Format</option>
+						  		<option ng-repeat= "format in formats" value={{format.formatName}}>{{format.formatType}}</option>					    		
 				  			</select>	
 				  		</div>
 				  		<div class="col-md-4">
@@ -40,15 +35,12 @@
 						<div class="col-md-3">
 							<label for="Category">Select Categor(y/ies):</label>
 							<div>
-					  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB -->
-						  			<option value=''>None</option>
-						    		<option value='Java'>Java</option>
-						    		<option value='C#'>C#</option>
-						    		<option value='.Net'>.Net</option>
-						    		<option value='Python'>Python</option>
-						    		<option value='C++'>C++</option>
+					  			<select ng-model='category'> <!-- Remove hard coding later change to pull from DB --> 
+						  			<option disabled="disabled" selected="selected">Select a Category</option>
+						  			<option ng-repeat= "category in categories">{{category}}</option>
+						  			
 					  			</select>
-					  			<button type="button" ng-click = 'addCategory()'>+</button>
+					  			<button type="button" ng-click = 'addCategory()'>Add</button>
 			  				</div>
 			  			</div>
 			  			<div class="col-md-3">
@@ -64,14 +56,11 @@
 							<!-- Remove hard coding later change to pull from DB-->
 							<div>
 					  			<select ng-model='tag'> 
-					  			<option value=''>None</option>
-					    		<option value='OOP'>OOP</option>
-					    		<option value='Servlets'>Servlets</option>
-					    		<option value='Web Services'>Web Services</option>
-					    		<option value='MVC'>MVC</option>
-					    		<option value='Other'>Other</option>
+					  				<option disabled="disabled" selected="selected">Select a Tag</option>
+						  			<option ng-repeat= "tag in tags">{{tag}}</option>
+					  			
 					  			</select>
-					  			<button type="button" ng-click = 'addTag()'>+</button>
+					  			<button type="button" ng-click = 'addTag()'>Add</button>
 				  			</div>
 			  			</div>
 			  			<div class=" col-md-3">

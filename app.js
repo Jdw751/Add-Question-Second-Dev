@@ -1,10 +1,10 @@
-var app = angular.module("putInQuestion",['ui.router','multipleSelectApp','multipleChoiceApp']);
+var app = angular.module("putInQuestion",['ui.router','multipleSelectApp','multipleChoiceApp',]);
 
 var select = angular.module('multipleSelectApp',[]);
 var choice = angular.module('multipleChoiceApp',[]);
 
 app.controller('QuestionCtrl', 
-	function($scope,$location,$state,$rootScope) {
+	function($scope,$location,$state,$rootScope,questionFactory) {
 
 	$scope.question = {				//question json
 			format:$scope.format,
@@ -12,12 +12,16 @@ app.controller('QuestionCtrl',
     		category:$scope.categoryList,
     		tags:$scope.tagList,
     		choices:$rootScope.answerList
-	};		
+	};
 
-	$scope.format = '';				//format of question
-	$scope.questionText = '';		//text of question	
-	$scope.categoryList = []; 		//list of categories
-	$scope.tagList = []; 			//list of tags
+	$scope.categories = questionFactory.getCategories();
+	$scope.tags =		questionFactory.getTags();
+	$scope.formats =	questionFactory.getFormats();			
+
+	$scope.format = 		'';		//format of question
+	$scope.questionText = 	'';		//text of question	
+	$scope.categoryList = 	[]; 	//list of categories
+	$scope.tagList = 		[]; 	//list of tags
 	$rootScope.optionList = []; 	//list of options for question
 	$rootScope.answerList = [];		//list of answer for question
 
@@ -60,12 +64,17 @@ app.controller('QuestionCtrl',
 
 		{
             $scope.categoryList.push($scope.category);
+           	var indexForRemoval = $scope.categories.indexOf($scope.category);//gets index of category to remove
+            $scope.categories.splice(indexForRemoval,1);//removes from master list
             $scope.category = '';//clears the checkbox
             
         }
         //debuging
         console.log(!$scope.categoryList.includes($scope.category));      
         console.log($scope.categoryList);
+        console.log("/");
+        
+        console.log($scope.categories);
 
 
 	};
@@ -77,6 +86,8 @@ app.controller('QuestionCtrl',
 
 		{
             $scope.tagList.push($scope.tag);
+            var indexForRemoval = $scope.tags.indexOf($scope.tag);
+            $scope.tags.splice(indexForRemoval,1);
             $scope.tag = '';//clears the check box
             
         }
@@ -108,14 +119,19 @@ app.controller('QuestionCtrl',
 
 	$scope.removeCategory = function(index)//removes category from question
         {
+        	
+         	var toReturnToMainList = $scope.categoryList.splice(index,1);
+         	//debugging
+         	console.log(toReturnToMainList);
 
-            $scope.categoryList.splice(index,1);       	
+            $scope.categories.push(toReturnToMainList[0]); //since the splice returns and array, just get index 0      	
     };
 
     $scope.removeTag = function(index)//removes tag from question
         {
 
-            $scope.tagList.splice(index,1);      	
+            var toReturnToMainList = $scope.tagList.splice(index,1);
+            $scope.tags.push(toReturnToMainList[0]);       	
     };
 
     $scope.removeOption = function(index)//removes option from question
@@ -129,19 +145,21 @@ app.controller('QuestionCtrl',
     $scope.clearQuestion = function()//clears all parameters on the question
         {
 
-           	$scope.format = '';
-			$scope.questionText = '';	//text of question
-			$scope.question = {};		//question json
-			$scope.categoryList = []; 	//list of categories
-			$scope.tagList = []; 		//list of tags
-			$rootScope.optionList = []; 	//list of options for question
-			$rootScope.answerList = [];		//list of answer for question
+           	$scope.format 			= '';
+			$scope.questionText 	= '';	//text of question
+			$scope.question 		= {};	//question json
+			$scope.categoryList 	= []; 	//list of categories
+			$scope.tagList 			= []; 	//list of tags
+			$rootScope.optionList 	= []; 	//list of options for question
+			$rootScope.answerList 	= [];	//list of answer for question
+			$scope.categories 		= questionFactory.getCategories();
+			$scope.tags 			= questionFactory.getTags();
 
 			//clear out page selections
-			$scope.option = '';
-			$scope.tag = '';
-			$scope.category = '';
-			$scope.questionText = '';
+			$scope.option 			= '';
+			$scope.tag 				= '';
+			$scope.category 		= '';
+			$scope.questionText 	= '';
 
 			$scope.go('');
 		      	
